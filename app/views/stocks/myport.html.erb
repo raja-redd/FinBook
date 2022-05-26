@@ -1,0 +1,30 @@
+all your portfolio will be appeared here
+<table class="table ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Stock Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Optoins</th>
+      <th scope="col">  </th>
+      <th scope="col">Privacy</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%=@id%>
+  <%i=0;
+  my_stocks=MyStock.all.where(user_id:@id)
+  my_stocks.each do |my_stock|
+  stock=Stock.find(my_stock.stock_id)
+#   stocks.each do |stock|
+  i=i+1;
+  %>
+    <tr>
+      <th scope="row"><%=i%></th>
+      <td><%=stock.Name%></td>
+      <td>Price</td>
+       <td><a href=<%="http://127.0.0.1:3000/delete/"+(stock.id.to_s)%>>delete</a></td>
+     
+    </tr>
+    <%end%>
+  </tbody>
