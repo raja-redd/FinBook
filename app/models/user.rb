@@ -8,4 +8,13 @@ class User < ApplicationRecord
               uniqueness: { case_sensitive: false },
               format: { with: VALID_EMAIL_REGEX }
     has_secure_password
-  end
+    
+    has_many :stars, class_name: "Follow", foreign_key: "follower_id"
+    # has_many :stars, through: :followers
+    has_many :followers, class_name: "Follow", foreign_key: "star_id"
+    # has_many :followers,  through: :stars 
+    has_many :freinds, class_name: "Friend", foreign_key: "freind1_id"
+    has_many :freinds, class_name: "Friend", foreign_key: "freind2_id"
+    #  has_many :freinds , through: :freinds
+   
+end

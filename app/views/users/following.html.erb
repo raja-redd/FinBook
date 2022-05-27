@@ -1,7 +1,7 @@
-<h1 align="center">All users</h1>
+<h1 align="center">people you are follwing</h1>
 
 <div align="center">
-  <% @users.each do |user| %>
+  <% @stars.each do |user| %>
     <ul class="listing">
       <div class="row">
         <div class="well col-md-4 col-md-offset-4">
@@ -14,17 +14,7 @@
                 <%else%>
                 <%= link_to 'Follow', ('/follow/'+user.id.to_s)%>
                 <%end%>
-                <%if ((Friend.all.where(freind1_id:current_user.id,freind2_id:user.id).count)>0)%>
-                <%x=Friend.all.where(freind1_id:current_user.id,freind2_id:user.id).first%>
-                  <%if x.status2 %>
-                  <%=link_to 'remove',("removee/"+user.id.to_s)%>
-                  <%else%>
-                  <%=link_to 'cancel',("removee/"+user.id.to_s)%>
-                  <%end%>
-                 <%else%>
-                <%= link_to 'request', ('/requestt/'+user.id.to_s)%>
-                <%end%>
-              <%end%>
+            <%end%>
           </li>
         </div>
       </div>

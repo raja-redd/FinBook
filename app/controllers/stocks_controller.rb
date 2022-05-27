@@ -13,14 +13,17 @@ class StocksController < ApplicationController
     end
 
     def myport
-        puts params[:id]
-        puts current_user.id
-        if ((params[:id]).to_s)!=((current_user.id).to_s)
-            puts "---------------------------------"
-            flash[:danger] = "You are not allowed to see"
-            redirect_to stocks_path
-        end
-        @id=current_user.id
+        # puts params[:id]
+        # puts current_user.id
+        # if ((params[:id]).to_s)!=((current_user.id).to_s)
+        #     puts "---------------------------------"
+        #     flash[:danger] = "You are not allowed to see"
+        #     redirect_to stocks_path
+        # end
+        # if logged_in? 
+        #      @id=current_user.id
+        # end
+        @id=params[:id]
         # puts "enters show"
         # puts "enters show---------------------"
 
@@ -69,6 +72,20 @@ class StocksController < ApplicationController
         stock.destroy
         end
         redirect_to stocks_path
+    end
+
+    def privacy 
+       
+        puts MyStock.all.where(stock_id:params[:id1]).where(user_id:current_user.id).count
+        @del=MyStock.where(stock_id:params[:id1]).where(user_id:current_user.id)
+       
+        @del.each do |stock|
+        puts stock.stock_id
+        stock.privacy=params[:id2]
+        stock.save
+        end
+        redirect_to ('/myport/'+current_user.id.to_s)
+        
     end
 
 

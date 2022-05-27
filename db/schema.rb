@@ -10,11 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_26_064733) do
+ActiveRecord::Schema.define(version: 2022_05_27_053429) do
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "star_id"
+    t.index ["follower_id", "star_id"], name: "index_follows_on_follower_id_and_star_id", unique: true
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.integer "freind1_id"
+    t.integer "freind2_id"
+    t.boolean "status1", default: false
+    t.boolean "status2", default: false
+  end
 
   create_table "my_stocks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "stock_id"
+    t.integer "privacy", default: 1
     t.index ["stock_id", "user_id"], name: "index_my_stocks_on_stock_id_and_user_id", unique: true
   end
 

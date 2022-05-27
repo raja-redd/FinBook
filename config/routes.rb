@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :stocks
   # get 'stocks', to 'stocks#index'
   resources :users
+
   get 'signup', to: 'users#new'
 
   get 'login', to: "sessions#new"
@@ -14,5 +15,13 @@ Rails.application.routes.draw do
   get 'add/:id', to: "stocks#add"
   get 'delete/:id', to: "stocks#delete"
   # get 'controller/stock/add'
-  
+  get 'privacy/:id1/:id2', to: "stocks#privacy"
+  get 'follow/:id', to: "users#follow"
+  get 'unfollow/:id', to: "users#unfollow"
+  get 'following/:id', to: 'users#following'
+  get 'requestt/:id', to: 'users#requestt'
+  get 'removee/:id', to: 'users#removee'
+  get 'requests/:id', to: 'users#requests'
+  get 'acceptt/:id', to: 'users#acceptt'
+  get 'friends/:id', to: 'users#friends'
 end

@@ -5,26 +5,54 @@ all your portfolio will be appeared here
       <th scope="col">#</th>
       <th scope="col">Stock Name</th>
       <th scope="col">Price</th>
+
+      <%# <td>Price</td> %>
+       <%if (logged_in? && ((current_user.id.to_s) == @id.to_s)) %>
       <th scope="col">Optoins</th>
-      <th scope="col">  </th>
       <th scope="col">Privacy</th>
+        <%end%>
     </tr>
   </thead>
   <tbody>
-  <%=@id%>
+  <%#=@id%>
   <%i=0;
   my_stocks=MyStock.all.where(user_id:@id)
+
+  def friendss?
+    flag=0;
+    x=Friend.all.where(freind1_id:current_user.id,freind2_id:@id)
+    if x.count>0
+      y=x.first
+      if y.status1==true && y.status2==true
+        flag=1;
+      end
+    else 
+      x=Friend.all.where(freind2_id:current_user.id,freind1_id:@id)
+      if x.count>0
+        y=x.first
+        if y.status1==true && y.status2==true
+          flag=1;
+        end
+      end
+    end
+    return flag
+  end
+
   my_stocks.each do |my_stock|
+  if    ((my_stock.privacy.to_s)==1.to_s) || (logged_in? && ((current_user.id.to_s) == @id.to_s)) || (((my_stock.privacy.to_s)==2.to_s) && (friendss?))
   stock=Stock.find(my_stock.stock_id)
 #   stocks.each do |stock|
   i=i+1;
   %>
     <tr>
-      <th scope="row"><%=i%></th>
+      <td scope="row"><%=i%></td>
       <td><%=stock.Name%></td>
-      <td>Price</td>
+      <td><%="Price"%></td>
+       <%if (logged_in? && ((current_user.id.to_s) == @id.to_s)) %>
        <td><a href=<%="http://127.0.0.1:3000/delete/"+(stock.id.to_s)%>>delete</a></td>
-     
+       <td><a href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/1"%>>everyone</a><a href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/2"%>>friends</a><a href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/3"%>>noOne</a></td>
+        <%end%>
     </tr>
+  <%end%>
     <%end%>
   </tbody>

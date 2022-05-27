@@ -20,14 +20,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <a class="nav-link active" aria-current="page" href="http://127.0.0.1:3000/">Home</a>
         <a class="nav-link" href=http://127.0.0.1:3000/stocks>Stocks</a>
+       <a class="nav-link" href=http://127.0.0.1:3000/users>Users</a>
         <%if current_user==nil %>
        <a class="nav-link" href=login>Login</a>
-        <a class="nav-link" href="/signup" >Sign-Up</a>
+        <a class="nav-link" href="http://127.0.0.1:3000//signup" >Sign-Up</a>
 
         <%else%>
+       <a class="nav-link" href=<%="http://127.0.0.1:3000/following/"+current_user.id.to_s%>>Your Stars</a>
         <a class="nav-link" href=<%="http://127.0.0.1:3000/myport/"+current_user.id.to_s%>>Portofolio</a>
+        <a class="nav-link" href=<%="http://127.0.0.1:3000/friends/"+current_user.id.to_s%>>Friends</a>
+     <a class="nav-link" href=<%="http://127.0.0.1:3000/requests/"+current_user.id.to_s%>>Friend Requests</a>
        <%= link_to "Log out", logout_path, method: :delete,class:"nav-link" %>
          
       <%end%>
