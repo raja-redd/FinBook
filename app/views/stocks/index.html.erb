@@ -1,11 +1,11 @@
-Stocks will be listed here
-<table class="table table-hover">
-  <thead>
+
+<table class="table table w-1000">
+  <thead calss="thead-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Stock Name</th>
       <th scope="col">Price</th>
-      <th scope="col">Optoins</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -16,21 +16,22 @@ Stocks will be listed here
     <tr>
       <th scope="row"><%=i%></th>
       <td><%=stock.Name%></td>
-      <td>Price</td>
+      <td><%=StockPrice.all.where(stock_id:stock.id).first[:price]%></td>
       <%# <td><%=link_to 'add',add(s_id:stock.id)</td> %> 
      <%if logged_in?%>
      <%  if (MyStock.all.where(stock_id:stock.id).where(user_id:current_user.id).count)<1 %>
-      <td><a href=<%="add/"+(stock.id.to_s)%>>add</a>
+      <td><a class="btn btn-outline-dark" href=<%="add/"+(stock.id.to_s)+"/3"%>>Add Privately</a>
+      <a class="btn btn-outline-dark" href=<%="add/"+(stock.id.to_s)+"/2"%>>Add into Friends Network</a>
+      <a class="btn btn-outline-dark" href=<%="add/"+(stock.id.to_s)+"/1"%>>Add Publicly</a>
      <%else%>
-      <td><a href=<%="delete/"+(stock.id.to_s)%>>delete   </a>
+      <td><a class="btn btn-outline-dark" href=<%="delete/"+(stock.id.to_s)%>>Delete from Portfolio   </a>
      
     <%end%>
     <%else%>
     <td>
     <%end%>
-    <br>
 
-      <%=link_to 'view',stock_path(stock)%></td>
+      <%=link_to 'view',stock_path(stock),class:"btn btn-outline-dark"%></td>
     </tr>
     <%end%>
   </tbody>

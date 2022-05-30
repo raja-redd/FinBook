@@ -10,9 +10,9 @@
              </h3>
             <% if logged_in? %>
               <%if ((Follow.all.where(follower_id:current_user.id).where(star_id:user.id).count)>0)%>
-                <%= link_to 'unfollow', ('/unfollow/'+user.id.to_s)%>
+                <%= link_to  'unfollow', ('/unfollow/'+user.id.to_s),class:"btn btn-outline-dark" %>
                 <%else%>
-                <%= link_to 'Follow', ('/follow/'+user.id.to_s)%>
+                <%= link_to 'Follow', ('/follow/'+user.id.to_s),class:"btn btn-outline-dark" %>
                 <%end%>
             <%end%>
           </li>

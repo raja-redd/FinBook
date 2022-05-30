@@ -1,6 +1,6 @@
-all your portfolio will be appeared here
+
 <table class="table ">
-  <thead>
+  <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Stock Name</th>
@@ -20,7 +20,8 @@ all your portfolio will be appeared here
 
   def friendss?
     flag=0;
-    x=Friend.all.where(freind1_id:current_user.id,freind2_id:@id)
+    if logged_in?
+     x=Friend.all.where(freind1_id:current_user.id,freind2_id:@id)
     if x.count>0
       y=x.first
       if y.status1==true && y.status2==true
@@ -35,6 +36,7 @@ all your portfolio will be appeared here
         end
       end
     end
+    end
     return flag
   end
 
@@ -47,10 +49,10 @@ all your portfolio will be appeared here
     <tr>
       <td scope="row"><%=i%></td>
       <td><%=stock.Name%></td>
-      <td><%="Price"%></td>
+      <td><%=StockPrice.all.where(stock_id:stock.id).first[:price]%></td>
        <%if (logged_in? && ((current_user.id.to_s) == @id.to_s)) %>
-       <td><a href=<%="http://127.0.0.1:3000/delete/"+(stock.id.to_s)%>>delete</a></td>
-       <td><a href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/1"%>>everyone</a><a href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/2"%>>friends</a><a href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/3"%>>noOne</a></td>
+       <td><a class="btn btn-outline-dark" href=<%="http://127.0.0.1:3000/delete/"+(stock.id.to_s)%>>delete</a></td>
+       <td><a  class="btn btn-outline-dark" href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/1"%>>everyone</a><a  class="btn btn-outline-dark" href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/2"%>>friends</a><a  class="btn btn-outline-dark" href=<%="http://127.0.0.1:3000/privacy/"+(stock.id.to_s)+"/3"%>>noOne</a></td>
         <%end%>
     </tr>
   <%end%>

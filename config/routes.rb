@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post 'login', to: "sessions#create"
   delete 'logout', to: "sessions#destroy"
   get 'myport/:id', to: "stocks#myport"
-  get 'add/:id', to: "stocks#add"
+  get 'add/:id/:id2', to: "stocks#add"
   get 'delete/:id', to: "stocks#delete"
   # get 'controller/stock/add'
   get 'privacy/:id1/:id2', to: "stocks#privacy"
@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   get 'requests/:id', to: 'users#requests'
   get 'acceptt/:id', to: 'users#acceptt'
   get 'friends/:id', to: 'users#friends'
+  get 'copy/:id/:id2', to: 'users#copy'
 end

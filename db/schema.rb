@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_27_053429) do
+ActiveRecord::Schema.define(version: 2022_05_30_041655) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2022_05_27_053429) do
     t.integer "freind2_id"
     t.boolean "status1", default: false
     t.boolean "status2", default: false
+    t.boolean "one_two"
+    t.boolean "two_one"
   end
 
   create_table "my_stocks", force: :cascade do |t|
